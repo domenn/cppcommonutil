@@ -37,7 +37,7 @@ if (DUTILCPP_ADD_PROTOBUF)
         message(WARNING "Protobuf not found. Run build_external to install it locally. Or install with your package manager.")
 
         set(THE_FILE_LIB_NAME e_protobuf)
-        set(THE_FILE_LIB_VERSION v3.9.1)
+        set(THE_FILE_LIB_VERSION v3.10.0)
 
         include(ExternalProject)
 
