@@ -3,7 +3,7 @@ project(dCppUtilsLib)
 set(CMAKE_CXX_STANDARD 17)
 
 option(DUTILCPP_SHARED "Build as shared library (dll on Windows) instead of static lib." OFF)
-option(DUTILCPP_ADD_SPDLOG "Use spdlog library. Implies FMT." OFF)
+option(DUTILCPP_ADD_SPDLOG "Use spdlog library. Implies FMT." ON)
 option(DUTILCPP_ADD_FMT "Use fmt library." OFF)
 option(DUTILCPP_ADD_CLI11 "Use CLI11 library." ON)
 option(DUTILCPP_ADD_PLATFORM_FOLDER "Use PLATFORM_FOLDER library." ON)
@@ -22,6 +22,7 @@ file(GLOB_RECURSE dCppUtilsLib_GLOB_SRC LIST_DIRECTORIES false "${CMAKE_CURRENT_
 set(D_UTIL_LIB_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/str_util.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/errnoname.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/src/stopwatches/log_info_on_destruct_stopwatch.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/file.cc
     src/tracer_exception.cc
     )
 
