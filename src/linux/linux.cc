@@ -40,7 +40,7 @@ void process_runner::Linux::start_non_executable_file(const std::string &path) {
   GError *error = nullptr;
 
 #if GLIB_CHECK_VERSION(2, 36, 0)
-  D_ANY_LOG_DEFAULT(VERBOSE, "Glib is quite new ... no need to g_type_init()");
+  D_DLOGT("Glib is quite new ... no need to g_type_init()");
 #else
   g_type_init();
 #endif

@@ -8,6 +8,7 @@ if (DUTILCPP_ADD_PROTOBUF)
         include(${CMAKE_CURRENT_LIST_DIR}/util/get_target_props.cmake)
     endif ()
     set(PROJECT_CMK_EXT_PROJS_PRE_CUSTOM ${CMAKE_CURRENT_BINARY_DIR}/CmkExtProj)
+#     message(STATUS Doing fp_proto ${PROJECT_CMK_EXT_PROJS_PRE_CUSTOM})
     find_package(protobuf
             #        PATHS
             #        ${PROJECT_CMK_EXT_PROJS_PRE}/cmake

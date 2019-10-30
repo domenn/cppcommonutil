@@ -30,6 +30,8 @@ class AnsiColor {
 
 namespace spdl::internal {
 
+#ifdef _WIN32
+
 class WindowsNativeColorfulSinkFactory : public spdl::internal::ColorfulSinkFactorySingleton {
   spdlog::sink_ptr get_sink() override;
 };
@@ -39,22 +41,13 @@ class AnsiWindowsColorSinkFactory : public spdl::internal::ColorfulSinkFactorySi
 };
 }  // namespace spdl::internal
 
-spdlog::sink_ptr spdl::internal::ColorfulSinkFactorySingleton::make_colorful_stdout() {
-#ifdef _WIN32
-  return inst()->get_sink();
-#else
-  auto c_sink = std::make_shared<spdlog::sinks::stdout_color_sink_st>();
-  c_sink->set_color(spdlog::level::info, AnsiColor::LIGHT_GRAY);
-  return c_sink;
-#endif
-}
-
 spdl::internal::ColorfulSinkFactorySingleton* spdl::internal::ColorfulSinkFactorySingleton::inst() {
   static std::unique_ptr<spdl::internal::ColorfulSinkFactorySingleton> internal_inst = make_the_inst();
   return internal_inst.get();
 }
 
 bool test_is_windows_cmd() {
+// #ifdef _WIN32
   HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);  // Get handle to standard output
   if (hConsole == INVALID_HANDLE_VALUE) {
     return false;
@@ -62,7 +55,9 @@ bool test_is_windows_cmd() {
   }
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   return GetConsoleScreenBufferInfo(hConsole, &csbi) != 0;
-
+//#else
+//  return false;
+//#endif
   //  auto colors = SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
   //  if (colors) {
   //    std::cout << "SetConsoleTextAttribute for color, no error.\n";
@@ -87,10 +82,24 @@ spdlog::sink_ptr WindowsNativeColorfulSinkFactory::get_sink() {
   c_sink->set_color_mode(spdlog::color_mode::always);
   return c_sink;
 }
+
 spdlog::sink_ptr AnsiWindowsColorSinkFactory::get_sink() {
   auto c_sink = std::make_shared<spdlog::sinks::ansicolor_stdout_sink_st>();
   c_sink->set_color(spdlog::level::info, AnsiColor::LIGHT_GRAY);
   c_sink->set_color_mode(spdlog::color_mode::always);
   return c_sink;
 }
+
+#endif
+
+spdlog::sink_ptr spdl::internal::ColorfulSinkFactorySingleton::make_colorful_stdout() {
+#ifdef _WIN32
+  return inst()->get_sink();
+#else
+  auto c_sink = std::make_shared<spdlog::sinks::stdout_color_sink_st>();
+  c_sink->set_color(spdlog::level::info, AnsiColor::LIGHT_GRAY);
+  return c_sink;
+#endif
+}
+
 }  // namespace spdl::internal

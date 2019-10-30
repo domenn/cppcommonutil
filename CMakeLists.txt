@@ -36,6 +36,10 @@ add_library(dCppUtilsLib ${PRIVATE_SHARED_PREFIX}
     ${D_UTIL_LIB_SRC}
     )
 
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND NOT WIN32)
+  target_link_libraries(dCppUtilsLib PUBLIC stdc++fs)
+endif()
+
 
 target_compile_definitions(dCppUtilsLib PUBLIC -DUNICODE -D_UNICODE $<$<CONFIG:Release>:NDEBUG>)
 

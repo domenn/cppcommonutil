@@ -5,7 +5,9 @@
 #include <d_spdlog/spd_logging.hpp>
 
 // Map level names ...
+#ifdef TRACE
 #define VERBOSE TRACE
+#endif
 #define WARNING WARN
 #define WARNING WARN
 
