@@ -47,7 +47,7 @@ std::shared_ptr<spdlog::logger> spdl::make_new_logger(const char *name) {
   auto shartedptr_lg = std::make_shared<spdlog::logger>(name, sinks.begin(), sinks.end());
   shartedptr_lg->set_level(my_level);
 
-  shartedptr_lg->set_pattern("%^%d.%m.%Y %H:%M:%S.%e %n [%l, %s] - %v%$");
+  shartedptr_lg->set_pattern("%^%d.%m.%Y %H:%M:%S.%e %n [%l, %s:%#] - %v%$");
 
   return shartedptr_lg;
 }

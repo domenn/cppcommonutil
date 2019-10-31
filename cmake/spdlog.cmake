@@ -7,7 +7,7 @@ if (DUTILCPP_ADD_SPDLOG)
       BUILD_COMMAND ""
       INSTALL_COMMAND ""
       GIT_REPOSITORY https://github.com/gabime/spdlog.git
-      GIT_TAG v1.4.1
+      GIT_TAG v1.4.2
       EXCLUDE_FROM_ALL TRUE
   )
 

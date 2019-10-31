@@ -34,7 +34,7 @@ if (DUTILCPP_ADD_PROTOBUF)
 #    endif()
 
     set(THE_FILE_LIB_NAME e_protobuf)
-    set(THE_FILE_LIB_VERSION v3.10.0)
+    set(THE_FILE_LIB_VERSION v3.10.1)
 
     include(ExternalProject)
 
