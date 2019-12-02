@@ -77,13 +77,13 @@ spdlog::level::level_enum spdl::level_from_str(std::string level_str) {
     return my_level;
   }
   if (level_str.size() == 1) {
-    d_common::str_util::upper_case_transform(level_str);
+  	std::for_each(level_str.begin(), level_str.end(), [](auto& c) {c = ::toupper(c); });
     auto idx =
         std::find(std::begin(spdlog::level::short_level_names), std::end(spdlog::level::short_level_names), level_str) -
         std::begin(spdlog::level::short_level_names);
     return static_cast<spdlog::level::level_enum>(idx);
   }
-  d_common::str_util::lower_case_transform(level_str);
+  std::for_each(level_str.begin(), level_str.end(), [](auto& c) {c = ::tolower(c); });
   return spdlog::level::from_str(level_str);
 }
 void spdl::set_level(const char *name, spdlog::level::level_enum new_lvl) {
