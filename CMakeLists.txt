@@ -67,6 +67,10 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/sqlitecpp.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/run_process.cmake)
 
 target_include_directories(dCppUtilsLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set_target_properties(dCppUtilsLib PROPERTIES DEBUG_POSTFIX d)
+
+install(TARGETS dCppUtilsLib DESTINATION "lib")
+install(DIRECTORY include DESTINATION . )
 
 #if(${DUTILCPP_AS_SUBDIR})
 #  add_library(dCppUtilsLib_sub INTERFACE)

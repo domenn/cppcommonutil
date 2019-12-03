@@ -8,14 +8,13 @@ endif ()
 
 # Temporarily disable usage of seperate FMT. Problem with SPDLOG.
 
-# if (DUTILCPP_ADD_SPDLOG OR DUTILCPP_ADD_FMT)
-if("0" STREQUAL "1")
+if (DUTILCPP_ADD_SPDLOG OR DUTILCPP_ADD_FMT)
   ExternalProject_Add(
       e_fmt
       PREFIX ${PROJECT_CMK_EXT_PROJS_PRE}
       CMAKE_CACHE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${PROJECT_CMK_EXT_PROJS_PRE} -DFMT_DOC:BOOL=0 -DFMT_TEST:BOOL=0 -DBUILD_SHARED_LIBS:BOOL=0
       GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-      GIT_TAG 6.0.0
+      GIT_TAG 6.1.0
       EXCLUDE_FROM_ALL TRUE
       BUILD_ALWAYS TRUE
   )
@@ -44,6 +43,11 @@ if("0" STREQUAL "1")
     endif ()
     # message(WARNING "Fmt Link")
     target_link_libraries(dCppUtilsLib PUBLIC fmt::fmt)
+    
+    get_target_property(FMT_INCS fmt::fmt INTERFACE_INCLUDE_DIRECTORIES)
+    # message(STATUS "Should install: ${FMT_INCS}")
+    install(DIRECTORY ${FMT_INCS}/fmt DESTINATION include)
+    
   else ()
     message(WARNING "fmt not build! Run build_external cmake target!\n  Testing dir: ${FmtTestingVar}")
   endif ()
