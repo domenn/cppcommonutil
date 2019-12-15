@@ -20,11 +20,10 @@ std::tuple<std::string, std::string, std::string> d_common::windows::format_wind
   LPVOID lpMsgBuf;
   std::wstring windows_friendly_parameter = utf8_to_utf16(str_lpszFunction);
   const wchar_t* lpszFunction = windows_friendly_parameter.c_str();
-  DWORD last_error_code = GetLastError();
 
   FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
                  NULL,
-                 last_error_code,
+                 error_code,
                  MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
                  (LPTSTR)&lpMsgBuf,
                  0,
@@ -36,7 +35,7 @@ std::tuple<std::string, std::string, std::string> d_common::windows::format_wind
                    LocalSize(lpDisplayBuf) / sizeof(TCHAR),
                    TEXT("%s failed with error %d: %s"),
                    lpszFunction,
-                   last_error_code,
+                   error_code,
                    lpMsgBuf);
   DeleteOnDestruct deleter0(lpMsgBuf);
   DeleteOnDestruct deleter1(lpDisplayBuf);
